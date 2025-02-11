@@ -1,0 +1,162 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model UserProfile {
+  id        String    @id @default(cuid())
+  userId    String    @unique // Clerk user ID
+  name      String
+  email     String
+  phoneNumber String?
+  isAdmin   Boolean   @default(false)
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  bookings  Booking[]
+}
+
+model Car {
+  id          String    @id @default(cuid())
+  name        String
+  brand       CarBrand
+  model       String
+  year        Int
+  seats       Int
+  price       Float     // Price per day
+  description String?
+  category    CarCategory
+  carTransmission     CarTransmission
+  features    CarFeature[]
+  images      CarImage[]  // Relation to CarImage model
+  video       String?     // URL to video
+  status      CarStatus   @default(AVAILABLE)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  bookings    Booking[]
+}
+
+model CarImage {
+  id        String   @id @default(cuid())
+  url       String
+  car       Car      @relation(fields: [carId], references: [id], onDelete: Cascade)
+  carId     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([carId])
+}
+
+enum CarCategory {
+  HATCHBACK
+  MINIVAN
+  SEDAN
+  BUS
+  MIDSIZE_SUV
+  SUV_4X4
+  PICKUP
+}
+
+enum CarBrand {
+  HONDA
+  TOYOTA
+  HYUNDAI
+  NISSAN
+  TESLA
+  MERCEDES_BENZ
+  BMW
+  JEEP
+  MITSUBISHI
+  KIA
+  FORD
+  CHEVROLET
+  MAZDA
+  INFINITI
+}
+
+enum CarFeature {
+  AIRBAG
+  FM_RADIO
+  POWER_WINDOWS
+  SENSOR
+  SPEED_KM
+  STEERING_WHEEL
+  BLIND_SPOT_MONITORING
+  BLUETOOTH
+  LANE_ASSIST
+  CRUISE_CONTROL
+  BACKUP_CAMERA
+  CARPLAY_ANDROID_AUTO
+  NAVIGATION_SYSTEM
+  BREAK_ASSIST
+  MULTI_FUNCTION_DISPLAY
+  PUSH_TO_START
+  REMOTE_START
+  HEATED_SEATS
+  PANORAMIC_SUNROOF
+  SUNROOF
+}
+
+enum CarTransmission {
+  AUTOMATIC
+  MANUAL
+}
+
+enum CarStatus {
+  AVAILABLE
+  BOOKED
+  MAINTENANCE
+  INACTIVE
+}
+
+model Booking {
+  id            String        @id @default(cuid())
+  user          UserProfile   @relation(fields: [userId], references: [id])
+  userId        String
+  car           Car           @relation(fields: [carId], references: [id])
+  carId         String
+  startDate     DateTime
+  endDate       DateTime
+  totalPrice    Float
+  location      String
+  status        BookingStatus @default(PENDING)
+  paymentStatus PaymentStatus @default(UNPAID)
+  paymentId     String?       // For payment reference
+  notes         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([userId])
+  @@index([carId])
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+  REFUNDED
+}
+
+model Analytics {
+  id                String   @id @default(cuid())
+  date              DateTime @unique
+  totalBookings     Int      @default(0)
+  completedBookings Int      @default(0)
+  cancelledBookings Int      @default(0)
+  totalRevenue      Float    @default(0)
+  activeUsers       Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+} 
