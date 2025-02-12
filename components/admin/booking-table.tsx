@@ -19,6 +19,7 @@ import { toast } from "sonner";
 interface Booking {
   id: string;
   startDate: string | Date;
+  location: string;
   endDate: string | Date;
   totalPrice: number;
   status: BookingStatus;
@@ -31,6 +32,7 @@ interface Booking {
     name: string;
     brand: string;
     model: string;
+    year: number;
   };
 }
 

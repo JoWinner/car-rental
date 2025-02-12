@@ -131,127 +131,149 @@ export function BookingDetailsModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl">
-        <DialogHeader>
+      <DialogContent className="max-h-screen h-full md:h-auto md:max-h-[85vh] w-full max-w-[90vw] md:max-w-2xl p-4 md:p-6 overflow-y-auto">
+        <DialogHeader className="mb-4">
           <DialogTitle>Booking Details</DialogTitle>
         </DialogHeader>
 
         <div className="grid gap-6">
           {/* Customer Details */}
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Customer Information</h3>
-            <div className="grid gap-2">
-              <div>
-                <span className="text-muted-foreground">Name:</span>{" "}
-                {booking.user.name}
+          <div className="space-y-3">
+            <h3 className="text-lg font-semibold">Customer Information</h3>
+            <div className="grid gap-2 text-sm md:text-base">
+              <div className="flex flex-col md:flex-row md:items-center justify-between p-2 bg-gray-50 rounded-lg">
+                <span className="text-muted-foreground">Name:</span>
+                <span className="font-medium">{booking.user.name}</span>
               </div>
-              <div>
-                <span className="text-muted-foreground">Email:</span>{" "}
-                {booking.user.email}
+              <div className="flex flex-col md:flex-row md:items-center justify-between p-2 bg-gray-50 rounded-lg">
+                <span className="text-muted-foreground">Email:</span>
+                <span className="font-medium break-all">
+                  {booking.user.email}
+                </span>
               </div>
-              <div>
-                <span className="text-muted-foreground">Phone:</span>{" "}
-                {booking.user.phoneNumber || "Not provided"}
+              <div className="flex flex-col md:flex-row md:items-center justify-between p-2 bg-gray-50 rounded-lg">
+                <span className="text-muted-foreground">Phone:</span>
+                <span className="font-medium">
+                  {booking.user.phoneNumber || "Not provided"}
+                </span>
               </div>
             </div>
           </div>
 
           {/* Car Details */}
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Car Details</h3>
-            <div className="grid gap-2">
-              <div>
-                <span className="text-muted-foreground">Car:</span>{" "}
-                {booking.car.name}
+          <div className="space-y-3">
+            <h3 className="text-lg font-semibold">Car Details</h3>
+            <div className="grid gap-2 text-sm md:text-base">
+              <div className="flex flex-col md:flex-row md:items-center justify-between p-2 bg-gray-50 rounded-lg">
+                <span className="text-muted-foreground">Car:</span>
+                <span className="font-medium">{booking.car.name}</span>
               </div>
-              <div>
-                <span className="text-muted-foreground">Model:</span>{" "}
-                {booking.car.brand} {booking.car.model}
+              <div className="flex flex-col md:flex-row md:items-center justify-between p-2 bg-gray-50 rounded-lg">
+                <span className="text-muted-foreground">Model:</span>
+                <span className="font-medium">
+                  {booking.car.brand} {booking.car.model}
+                </span>
               </div>
-              <div>
-                <span className="text-muted-foreground">Year:</span>{" "}
-                {booking.car.year}
+              <div className="flex flex-col md:flex-row md:items-center justify-between p-2 bg-gray-50 rounded-lg">
+                <span className="text-muted-foreground">Year:</span>
+                <span className="font-medium">{booking.car.year}</span>
               </div>
             </div>
           </div>
 
           {/* Booking Details */}
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Booking Information</h3>
-            <div className="grid gap-2">
-              <div>
-                <span className="text-muted-foreground">Pickup Date:</span>{" "}
-                {formatDate(booking.startDate)}
+          <div className="space-y-3">
+            <h3 className="text-lg font-semibold">Booking Information</h3>
+            <div className="grid gap-2 text-sm md:text-base">
+              <div className="flex flex-col md:flex-row md:items-center justify-between p-2 bg-gray-50 rounded-lg">
+                <span className="text-muted-foreground">Pickup Date:</span>
+                <span className="font-medium">
+                  {formatDate(booking.startDate)}
+                </span>
               </div>
-              <div>
-                <span className="text-muted-foreground">Return Date:</span>{" "}
-                {formatDate(booking.endDate)}
+              <div className="flex flex-col md:flex-row md:items-center justify-between p-2 bg-gray-50 rounded-lg">
+                <span className="text-muted-foreground">Return Date:</span>
+                <span className="font-medium">
+                  {formatDate(booking.endDate)}
+                </span>
               </div>
-              <div>
-                <span className="text-muted-foreground">Location:</span>{" "}
-                {booking.location}
+              <div className="flex flex-col md:flex-row md:items-center justify-between p-2 bg-gray-50 rounded-lg">
+                <span className="text-muted-foreground">Location:</span>
+                <span className="font-medium">{booking.location}</span>
               </div>
-              <div>
-                <span className="text-muted-foreground">Total Price:</span> $
-                {booking.totalPrice.toFixed(2)}
+              <div className="flex flex-col md:flex-row md:items-center justify-between p-2 bg-gray-50 rounded-lg">
+                <span className="text-muted-foreground">Total Price:</span>
+                <span className="font-medium">
+                  ${booking.totalPrice.toFixed(2)}
+                </span>
               </div>
-              <div>
-                <span className="text-muted-foreground">Notes:</span>{" "}
-                {booking.notes || "No notes"}
+              <div className="flex flex-col p-2 bg-gray-50 rounded-lg">
+                <span className="text-muted-foreground mb-1">Notes:</span>
+                <span className="font-medium whitespace-pre-wrap">
+                  {booking.notes || "No notes"}
+                </span>
               </div>
             </div>
           </div>
 
           {/* Status Management */}
           <div className="grid gap-4 pt-4">
-            <div className="flex items-center gap-4">
-              <span className="text-sm font-medium">Booking Status:</span>
-              <Select
-                disabled={isLoading}
-                value={booking.status}
-                onValueChange={(value: BookingStatus) =>
-                  handleStatusChange(value)
-                }
-              >
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select status" />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.values(BookingStatus).map((status) => (
-                    <SelectItem key={status} value={status}>
-                      {status}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Badge className={statusColors[booking.status]}>
-                {booking.status}
-              </Badge>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+              <span className="text-sm font-medium min-w-[100px]">
+                Booking Status:
+              </span>
+              <div className="flex flex-1 items-center gap-2">
+                <Select
+                  disabled={isLoading}
+                  value={booking.status}
+                  onValueChange={(value: BookingStatus) =>
+                    handleStatusChange(value)
+                  }
+                >
+                  <SelectTrigger className="w-full sm:w-[180px]">
+                    <SelectValue placeholder="Select status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.values(BookingStatus).map((status) => (
+                      <SelectItem key={status} value={status}>
+                        {status}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Badge className={statusColors[booking.status]}>
+                  {booking.status}
+                </Badge>
+              </div>
             </div>
 
-            <div className="flex items-center gap-4">
-              <span className="text-sm font-medium">Payment Status:</span>
-              <Select
-                disabled={isLoading}
-                value={booking.paymentStatus}
-                onValueChange={(value: PaymentStatus) =>
-                  handlePaymentStatusChange(value)
-                }
-              >
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select payment status" />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.values(PaymentStatus).map((status) => (
-                    <SelectItem key={status} value={status}>
-                      {status}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Badge className={paymentStatusColors[booking.paymentStatus]}>
-                {booking.paymentStatus}
-              </Badge>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+              <span className="text-sm font-medium min-w-[100px]">
+                Payment Status:
+              </span>
+              <div className="flex flex-1 items-center gap-2">
+                <Select
+                  disabled={isLoading}
+                  value={booking.paymentStatus}
+                  onValueChange={(value: PaymentStatus) =>
+                    handlePaymentStatusChange(value)
+                  }
+                >
+                  <SelectTrigger className="w-full sm:w-[180px]">
+                    <SelectValue placeholder="Select payment status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.values(PaymentStatus).map((status) => (
+                      <SelectItem key={status} value={status}>
+                        {status}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Badge className={paymentStatusColors[booking.paymentStatus]}>
+                  {booking.paymentStatus}
+                </Badge>
+              </div>
             </div>
           </div>
         </div>

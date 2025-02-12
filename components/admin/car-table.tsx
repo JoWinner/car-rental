@@ -115,7 +115,7 @@ export function CarTable({
               </TableCell>
               <TableCell>
                 <div className="text-sm">
-                  <p>Year: {car.year}</p>
+                  <p> {car.year}</p>
                 </div>
               </TableCell>
               <TableCell>${car.price.toFixed(2)}</TableCell>

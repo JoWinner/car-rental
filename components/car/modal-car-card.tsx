@@ -4,7 +4,6 @@ import { FaGasPump } from "react-icons/fa";
 import { MdAirlineSeatReclineNormal } from "react-icons/md";
 import { PiSteeringWheelFill } from "react-icons/pi";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import BookingModal from "@/components/booking/booking-modal";
 import Link from "next/link";
 
 interface CarCardProps {
@@ -25,8 +24,7 @@ interface CarCardProps {
   };
 }
 
-function CarCard({ car }: CarCardProps) {
-  const [showBookingModal, setShowBookingModal] = useState(false);
+function ModalCarCard({ car }: CarCardProps) {
 
   // Get the image URL from either data structure
   const imageUrl =
@@ -74,7 +72,7 @@ function CarCard({ car }: CarCardProps) {
             <div className="text-center text-gray-500">
               <MdAirlineSeatReclineNormal className="w-full text-[22px] mb-2" />
               <h2 className="line-clamp-5 text-[14px] font-light">
-                {seatCount} Seat
+                {seatCount} S
               </h2>
             </div>
             <div className="text-center text-gray-500">
@@ -83,11 +81,12 @@ function CarCard({ car }: CarCardProps) {
             </div>
           </div>
 
-            <button
-              onClick={() => setShowBookingModal(true)}
+        
+            <Link
+              href={`/cars/${car.id}`}
               className="hidden group-hover:flex bg-gradient-to-r from-blue-400 to-blue-700 rounded-lg text-white w-full px-5 py-2 mt-2 justify-between"
             >
-              Rent Now
+             More Details
               <span className="bg-blue-400 p-1 rounded-md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -102,18 +101,12 @@ function CarCard({ car }: CarCardProps) {
                   />
                 </svg>
               </span>
-            </button>
-          
+            </Link>
         </CardContent>
       </Card>
 
-      <BookingModal
-        car={car}
-        isOpen={showBookingModal}
-        onClose={() => setShowBookingModal(false)}
-      />
     </>
   );
 }
 
-export default CarCard;
+export default ModalCarCard;

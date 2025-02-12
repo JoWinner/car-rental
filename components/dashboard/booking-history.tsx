@@ -65,12 +65,12 @@ export function BookingHistory({
               </TableCell>
               <TableCell>${booking.totalPrice.toFixed(2)}</TableCell>
               <TableCell>
-                <Badge className={statusColors[booking.status]}>
+                <Badge className={statusColors[booking.status as BookingStatus]}>
                   {booking.status}
                 </Badge>
               </TableCell>
               <TableCell>
-                <Badge className={paymentStatusColors[booking.paymentStatus]}>
+                <Badge className={paymentStatusColors[booking.paymentStatus as PaymentStatus]}>
                   {booking.paymentStatus}
                 </Badge>
               </TableCell>

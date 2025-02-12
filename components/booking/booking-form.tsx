@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -23,6 +23,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { createBooking } from "@/services/booking";
+import { Card, CardContent } from "@/components/ui/card";
+import { differenceInDays } from "date-fns";
 
 // Form validation schema
 const formSchema = z.object({
@@ -43,6 +45,7 @@ const STORE_LOCATIONS = [
 
 function BookingForm({ car, onClose }: { car: any; onClose: () => void }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [totalCost, setTotalCost] = useState(0);
   const today = new Date();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -57,6 +60,21 @@ function BookingForm({ car, onClose }: { car: any; onClose: () => void }) {
       carId: car?.id || "",
     },
   });
+
+  // Calculate total cost whenever dates change
+  useEffect(() => {
+    const pickUpDate = form.watch("pickUpDate");
+    const dropOffDate = form.watch("dropOffDate");
+
+    if (pickUpDate && dropOffDate) {
+      const start = new Date(pickUpDate);
+      const end = new Date(dropOffDate);
+      const days = Math.max(differenceInDays(end, start), 1);
+      setTotalCost(days * car.price);
+    } else {
+      setTotalCost(0);
+    }
+  }, [form.watch("pickUpDate"), form.watch("dropOffDate"), car.price]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
@@ -110,7 +128,13 @@ function BookingForm({ car, onClose }: { car: any; onClose: () => void }) {
         notes: `Contact: ${values.contactNumber}\nPickup Location: ${values.location}`,
       };
 
-      await createBooking(bookingData);
+      const booking = {
+        ...bookingData,
+        startDate: new Date(bookingData.startDate),
+        endDate: new Date(bookingData.endDate),
+      };
+
+      await createBooking(booking);
 
       toast.success("Booking Created Successfully!", {
         description: "Your car has been booked.",
@@ -130,7 +154,7 @@ function BookingForm({ car, onClose }: { car: any; onClose: () => void }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 font-normal"
+        className="space-y-4 md:space-y-6"
       >
         <FormField
           control={form.control}
@@ -139,7 +163,7 @@ function BookingForm({ car, onClose }: { car: any; onClose: () => void }) {
             <FormItem>
               <FormLabel className="text-gray-500">Pickup Location</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select pickup location" />
                 </SelectTrigger>
                 <SelectContent>
@@ -155,7 +179,7 @@ function BookingForm({ car, onClose }: { car: any; onClose: () => void }) {
           )}
         />
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField
             control={form.control}
             name="pickUpDate"
@@ -166,6 +190,7 @@ function BookingForm({ car, onClose }: { car: any; onClose: () => void }) {
                   <Input
                     type="date"
                     min={today.toISOString().split("T")[0]}
+                    className="w-full"
                     {...field}
                   />
                 </FormControl>
@@ -186,6 +211,7 @@ function BookingForm({ car, onClose }: { car: any; onClose: () => void }) {
                       form.watch("pickUpDate") ||
                       today.toISOString().split("T")[0]
                     }
+                    className="w-full"
                     {...field}
                   />
                 </FormControl>
@@ -195,7 +221,7 @@ function BookingForm({ car, onClose }: { car: any; onClose: () => void }) {
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField
             control={form.control}
             name="pickUpTime"
@@ -203,7 +229,7 @@ function BookingForm({ car, onClose }: { car: any; onClose: () => void }) {
               <FormItem>
                 <FormLabel className="text-gray-500">Pick Up Time</FormLabel>
                 <FormControl>
-                  <Input type="time" {...field} />
+                  <Input type="time" className="w-full" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -216,7 +242,7 @@ function BookingForm({ car, onClose }: { car: any; onClose: () => void }) {
               <FormItem>
                 <FormLabel className="text-gray-500">Drop Off Time</FormLabel>
                 <FormControl>
-                  <Input type="time" {...field} />
+                  <Input type="time" className="w-full" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -231,19 +257,61 @@ function BookingForm({ car, onClose }: { car: any; onClose: () => void }) {
             <FormItem>
               <FormLabel className="text-gray-500">Contact Number</FormLabel>
               <FormControl>
-                <Input placeholder="Enter your contact number" {...field} />
+                <Input
+                  placeholder="Enter your contact number"
+                  className="w-full"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <div className="flex justify-end gap-4">
-          <Button variant="outline" type="button" onClick={onClose}>
+        {totalCost > 0 && (
+          <Card className="mt-6">
+            <CardContent className="pt-6">
+              <div className="space-y-3">
+                <div className="flex justify-between text-sm">
+                  <span>Daily Rate:</span>
+                  <span>${car.price.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span>Number of Days:</span>
+                  <span>
+                    {Math.max(
+                      differenceInDays(
+                        new Date(form.watch("dropOffDate")),
+                        new Date(form.watch("pickUpDate"))
+                      ),
+                      1
+                    )}
+                  </span>
+                </div>
+                <div className="flex justify-between font-bold text-lg border-t pt-3">
+                  <span>Total Cost:</span>
+                  <span>${totalCost.toFixed(2)}</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        <div className="flex flex-col sm:flex-row justify-end gap-3 sm:gap-4 mt-6">
+          <Button
+            variant="outline"
+            type="button"
+            onClick={onClose}
+            className="w-full sm:w-auto"
+          >
             Close
           </Button>
-          <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Booking..." : "Book"}
+          <Button
+            type="submit"
+            disabled={isLoading}
+            className="w-full sm:w-auto"
+          >
+            {isLoading ? "Booking..." : "Book Now"}
           </Button>
         </div>
       </form>

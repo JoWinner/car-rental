@@ -8,7 +8,7 @@ export default function Footer() {
     <div className="border-t  border-border/40 bg-violet-900 backdrop-blur supports-[backdrop-filter]:bg-violet-900">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
-          <div className="">
+        <Link href="/"  className="">
             <Image
               src="/logo.png"
               alt="Logo"
@@ -17,7 +17,7 @@ export default function Footer() {
               className="h-16 w-24"
             />
             <p className="text-sm text-gray-200"> Flag house 2xx Adinkra Street , Accra,Ghana </p>
-          </div>
+          </Link>
 
           <div className="space-y-4">
             <h4 className="text-lg font-semibold text-white">Legal</h4>
