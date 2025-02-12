@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     }
 
     // Get user profile ID
-    const user = await userProfile();
+    const user = await userProfile(userId);
     if (!user) {
       return new NextResponse("User profile not found", { status: 404 });
     }
