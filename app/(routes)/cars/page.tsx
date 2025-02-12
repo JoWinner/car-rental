@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { CarCarousel } from "@/components/car/car-carousel";
 import { CarsList } from "@/components/car/cars-list";
 import { db } from "@/lib/db";
@@ -27,25 +28,31 @@ export default async function CarsPage() {
   return (
     <div className="py-8 px-14 md:px-20">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold font-secondary text-primary">Available Cars</h1>
+        <h1 className="text-3xl font-bold font-secondary text-primary">
+          Available Cars
+        </h1>
         <p className="text-muted-foreground">
           Browse and book from our selection of premium vehicles
         </p>
       </div>
-      <CarCarousel cars={initialData} />
-      <CarsList
-        initialData={{
-          cars: initialData,
-          metadata: {
-            total,
-            page: 1,
-            limit: 9,
-            totalPages: Math.ceil(total / 9),
-            hasNextPage: total > 9,
-            hasPrevPage: false,
-          },
-        }}
-      />
+      <Suspense fallback={<div>Loading carousel...</div>}>
+        <CarCarousel cars={initialData} />
+      </Suspense>
+      <Suspense fallback={<div>Loading cars...</div>}>
+        <CarsList
+          initialData={{
+            cars: initialData,
+            metadata: {
+              total,
+              page: 1,
+              limit: 9,
+              totalPages: Math.ceil(total / 9),
+              hasNextPage: total > 9,
+              hasPrevPage: false,
+            },
+          }}
+        />
+      </Suspense>
     </div>
   );
 }
