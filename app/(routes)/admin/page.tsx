@@ -59,8 +59,6 @@ export default async function AdminDashboardPage() {
     },
   });
 
- 
-
   async function handleViewBooking(booking: any) {
     "use server";
     // Implement view booking details
@@ -75,8 +73,6 @@ export default async function AdminDashboardPage() {
     });
   }
 
-
-
   return (
     <>
       <AdminHeader
@@ -87,13 +83,9 @@ export default async function AdminDashboardPage() {
         <AnalyticsCards analytics={analytics} carsStats={carsStats} />
 
         <div className="space-y-16">
-            <div className="my-10">
-              <h2 className="text-2xl font-bold mb-4">Recent Bookings</h2>
-              <BookingTable
-                bookings={recentBookings}
-                onView={handleViewBooking}
-                onConfirm={handleConfirmBooking}
-              />          
+          <div className="my-10">
+            <h2 className="text-2xl font-bold mb-4">Recent Bookings</h2>
+            <BookingTable bookings={recentBookings} />
           </div>
 
           <div className="space-y-8">
@@ -103,7 +95,7 @@ export default async function AdminDashboardPage() {
             </div>
             <div>
               <h2 className="text-2xl font-bold mb-4">Cars Overview</h2>
-              <CarTable cars={cars} showActions />
+              <CarTable cars={cars} showActions editUrl="/admin/cars" />
             </div>
           </div>
         </div>

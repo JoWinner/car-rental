@@ -2,7 +2,6 @@
 
 import { CarForm } from "@/components/admin/car-form";
 import { AdminHeader } from "@/components/admin/admin-header";
-import { AdminShell } from "@/components/admin/admin-shell";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -40,7 +39,7 @@ export default function NewCarPage() {
           title="Add New Car"
           description="Add and edit your car fleet."
         />
-        <CarForm onSubmit={onSubmit} />
+        <CarForm />
       </div>
     </>
   );

@@ -21,7 +21,17 @@ interface CarsData {
 }
 
 export default function Home() {
-  const [carsData, setCarsData] = useState<CarsData | null>(null);
+  const [carsData, setCarsData] = useState<CarsData>({
+    cars: [],
+    metadata: {
+      total: 0,
+      page: 1,
+      limit: 9,
+      totalPages: 0,
+      hasNextPage: false,
+      hasPrevPage: false,
+    },
+  });
   const [showToastMsg, setShowToastMsg] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -57,7 +67,7 @@ export default function Home() {
         value={{ showToastMsg, setShowToastMsg }}
       >
         <Hero />
-        <CarCarousel cars={carsData?.cars || []} />
+        <CarCarousel cars={carsData.cars} />
         {isLoading ? (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(6)].map((_, i) => (
