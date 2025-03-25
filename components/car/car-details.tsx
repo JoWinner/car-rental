@@ -46,29 +46,35 @@ export function CarDetails({ carId, similarCars }: CarDetailsProps) {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        Loading...
+      <div className="flex justify-center items-center min-h-[50vh]">
+        <div className="animate-pulse text-xl">Loading...</div>
       </div>
     );
   }
 
   if (!car) {
-    return <div>Car not found</div>;
+    return (
+      <div className="flex justify-center items-center min-h-[50vh]">
+        <div className="text-xl">Car not found</div>
+      </div>
+    );
   }
 
   return (
-    <div className="mx-10 md:mx-32 py-10 font-primary">
-      <div className="flex flex-col gap-8">
+    <div className="mx-4 md:mx-32 py-6 md:py-10 font-primary">
+      <div className="flex flex-col gap-6 md:gap-8">
         <div className="font-secondary">
-          <h1 className="text-3xl font-bold">{car.name}</h1>
-          <p className="text-[30px] font-semibold text-primary mt-2">
-            ${car.price}/ day
+          <h1 className="text-3xl md:text-4xl font-bold">{car.name}</h1>
+          <p className="text-3xl md:text-[40px] font-semibold text-primary mt-2">
+            ${car.price}
+            <span className="text-lg md:text-xl font-normal">/day</span>
           </p>
         </div>
 
         <Separator />
-        {/* Top - Images */}
-        <div className="mx-auto w-3/4 space-y-4">
+
+        {/* Images Section */}
+        <div className="w-full md:w-3/4 mx-auto space-y-4">
           <div className="relative aspect-video overflow-hidden rounded-lg">
             <Image
               src={selectedImage}
@@ -78,7 +84,7 @@ export function CarDetails({ carId, similarCars }: CarDetailsProps) {
               priority
             />
           </div>
-          <div className="grid grid-cols-8 gap-2">
+          <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
             {car.images.map((image) => (
               <div
                 key={image.url}
@@ -98,45 +104,45 @@ export function CarDetails({ carId, similarCars }: CarDetailsProps) {
           </div>
         </div>
 
-        {/* Bottom - Details */}
+        {/* Details Section */}
         <div className="space-y-6">
           <Separator />
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             <div>
-              <h2 className="text-lg font-semibold">Details</h2>
-              <div className="grid grid-cols-2 gap-4 mt-2">
-                <div>
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">Details</h2>
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
+                <div className="space-y-1">
                   <p className="text-sm text-muted-foreground">Brand</p>
-                  <p className="font-secondary">{car.brand}</p>
+                  <p className="text-lg md:text-xl font-secondary">{car.brand}</p>
                 </div>
-                <div>
+                <div className="space-y-1">
                   <p className="text-sm text-muted-foreground">Model</p>
-                  <p className="font-secondary">{car.model}</p>
+                  <p className="text-lg md:text-xl font-secondary">{car.model}</p>
                 </div>
-                <div>
+                <div className="space-y-1">
                   <p className="text-sm text-muted-foreground">Year</p>
-                  <p className="font-secondary">{car.year}</p>
+                  <p className="text-lg md:text-xl font-secondary">{car.year}</p>
                 </div>
-                <div>
+                <div className="space-y-1">
                   <p className="text-sm text-muted-foreground">Category</p>
-                  <p className="font-secondary">{car.category}</p>
+                  <p className="text-lg md:text-xl font-secondary">{car.category}</p>
                 </div>
               </div>
             </div>
 
             <div>
-              <h2 className="text-lg font-semibold">Description</h2>
-              <p className="text-sm mt-2">{car.description}</p>
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">Description</h2>
+              <p className="text-base md:text-lg">{car.description}</p>
             </div>
 
             <div>
-              <h2 className="text-lg font-semibold">Features</h2>
-              <div className="grid grid-cols-2 gap-2 mt-2 font-mono">
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">Features</h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 font-mono">
                 {car.features.map((feature) => (
                   <div key={feature} className="flex items-center gap-2">
                     <div className="h-2 w-2 rounded-full bg-primary" />
-                    <span className="text-sm">
+                    <span className="text-base md:text-lg">
                       {feature.replace(/_/g, " ")}
                     </span>
                   </div>
@@ -146,17 +152,19 @@ export function CarDetails({ carId, similarCars }: CarDetailsProps) {
 
             {car.video && (
               <div>
-                <h2 className="text-lg font-semibold">Video Preview</h2>
+                <h2 className="text-xl md:text-2xl font-semibold mb-4">Video Preview</h2>
                 <video
                   src={car.video}
                   controls
-                  className="w-full mt-2 rounded-lg"
+                  className="w-full rounded-lg"
+                  poster={car.images[0]?.url}
                 />
               </div>
             )}
-            <div className="w-1/2 mx-auto flex justify-center">
+
+            <div className="flex justify-center py-4 md:py-6">
               <Button
-                className="w-full font-bold font-secondary text-lg"
+                className="w-full md:w-1/2 font-bold font-secondary text-lg md:text-xl py-6 md:py-8"
                 size="lg"
                 onClick={() => setShowBookingModal(true)}
               >
@@ -171,18 +179,18 @@ export function CarDetails({ carId, similarCars }: CarDetailsProps) {
         <TermsAndConditions />
       </div>
 
-      <Link href="/cars" className="flex justify-center mt-24">
-        <button
-          className="p-2 bg-primary text-white
-            px-4 rounded-full 
-            hover:scale-105 transition-all font-bold font-secondary"
-        >
-          Find More Cars
-        </button>
-      </Link>
+      <div className="flex justify-center mt-16 md:mt-24">
+        <Link href="/cars">
+          <Button
+            className="px-6 py-3 bg-primary text-white rounded-full hover:scale-105 transition-all font-bold font-secondary text-base md:text-lg"
+          >
+            Find More Cars
+          </Button>
+        </Link>
+      </div>
 
-      <div className="">
-        <h2 className="text-2xl font-bold text-center">
+      <div className="mt-16">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
           Similar Cars You Might Like
         </h2>
         <CarCarousel cars={similarCars} />

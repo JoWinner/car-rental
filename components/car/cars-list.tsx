@@ -140,12 +140,12 @@ export function CarsList({ initialData, carsList }: CarsListProps) {
   return (
     <div className="space-y-8">
       {/* Search Bar */}
-      <div className="mt-5">
-        <h2 className="text-center text-[20px] text-gray-400 mb-3 font-secondary">
+      <div className="mt-4 sm:mt-5">
+        <h2 className="text-center text-lg sm:text-xl text-gray-400 mb-3 font-secondary">
           Let's find your perfect car
         </h2>
         <div className="flex justify-center">
-          <div className="flex bg-gray-100 p-1 px-5 gap-2 rounded-full items-center w-full max-w-xl">
+          <div className="flex bg-gray-100 p-2 px-4 gap-2 rounded-full items-center w-full max-w-xl">
             <button
               onClick={handleSearch}
               className="text-gray-500 hover:text-gray-700 transition-colors"
@@ -173,37 +173,16 @@ export function CarsList({ initialData, carsList }: CarsListProps) {
                 }
               }}
               placeholder="Search for cars..."
-              className="border-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 bg-transparent w-full"
+              className="border-none shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 bg-transparent w-full text-base"
             />
           </div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {/* <div className="space-y-2">
-          <Label>Price Range (per day)</Label>
-          <div className="pt-2">
-            <Slider
-              min={0}
-              max={10000}
-              step={10}
-              value={[minPrice, maxPrice]}
-              onValueChange={([min, max]) => {
-                setMinPrice(min);
-                setMaxPrice(max);
-                updateFilters({ minPrice: min, maxPrice: max });
-              }}
-            />
-            <div className="mt-2 flex items-center justify-between text-sm text-muted-foreground">
-              <span>${minPrice}</span>
-              <span>${maxPrice}</span>
-            </div>
-          </div>
-        </div> */}
-
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-2">
-          <Label>Brand</Label>
+          <Label className="text-sm sm:text-base">Brand</Label>
           <Select
             value={brand}
             onValueChange={(value) => {
@@ -211,7 +190,7 @@ export function CarsList({ initialData, carsList }: CarsListProps) {
               updateFilters({ brand: value });
             }}
           >
-            <SelectTrigger>
+            <SelectTrigger className="h-12 text-base">
               <SelectValue placeholder="All brands" />
             </SelectTrigger>
             <SelectContent>

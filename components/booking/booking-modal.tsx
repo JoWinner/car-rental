@@ -51,7 +51,7 @@ function BookingModal({ car, isOpen, onClose }: BookingModalProps) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-h-screen h-full md:h-auto md:max-h-[85vh] w-full md:max-w-5xl p-0 md:p-6">
         <DialogHeader className="px-4 pt-4 md:px-0 md:pt-0">
-          <DialogTitle>Book Your Car</DialogTitle>
+          <DialogTitle className="font-secondary text-blue-600">Book Your Ride</DialogTitle>
         </DialogHeader>
         <ScrollArea className="h-[calc(100vh-8rem)] md:h-auto">
           <div className="flex flex-col md:grid md:grid-cols-2 gap-6 p-4 md:p-0">

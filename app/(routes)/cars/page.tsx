@@ -26,7 +26,7 @@ export default async function CarsPage() {
   });
 
   return (
-    <div className="py-8 px-14 md:px-20">
+    <div className="py-8 px-4 md:px-14">
       <div className="mb-8">
         <h1 className="text-3xl font-bold font-secondary text-primary">
           Available Cars
@@ -35,10 +35,24 @@ export default async function CarsPage() {
           Browse and book from our selection of premium vehicles
         </p>
       </div>
-      <Suspense fallback={<div>Loading carousel...</div>}>
+      <Suspense fallback={<div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {[...Array(6)].map((_, i) => (
+              <div
+                key={i}
+                className="h-[300px] rounded-lg bg-gray-100 animate-pulse"
+              />
+            ))}
+          </div>}>
         <CarCarousel cars={initialData} />
       </Suspense>
-      <Suspense fallback={<div>Loading cars...</div>}>
+      <Suspense fallback={<div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {[...Array(6)].map((_, i) => (
+              <div
+                key={i}
+                className="h-[300px] rounded-lg bg-gray-100 animate-pulse"
+              />
+            ))}
+          </div>}>
         <CarsList
           initialData={{
             cars: initialData,

@@ -62,14 +62,12 @@ export default function Home() {
   }, [showToastMsg]);
 
   return (
-    <div className="py-8 px-14 md:px-20">
-      <BookCreatedFlagContext.Provider
-        value={{ showToastMsg, setShowToastMsg }}
-      >
+    <div className="py-4 px-4 md:py-8 md:px-14">
+      <BookCreatedFlagContext.Provider value={{ showToastMsg, setShowToastMsg }}>
         <Hero />
         <CarCarousel cars={carsData.cars} />
         {isLoading ? (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(6)].map((_, i) => (
               <div
                 key={i}

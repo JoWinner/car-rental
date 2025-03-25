@@ -179,7 +179,7 @@ function BookingForm({ car, onClose }: { car: any; onClose: () => void }) {
           )}
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           <FormField
             control={form.control}
             name="pickUpDate"
@@ -221,7 +221,7 @@ function BookingForm({ car, onClose }: { car: any; onClose: () => void }) {
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4">
           <FormField
             control={form.control}
             name="pickUpTime"
@@ -297,14 +297,14 @@ function BookingForm({ car, onClose }: { car: any; onClose: () => void }) {
           </Card>
         )}
 
-        <div className="flex flex-col sm:flex-row justify-end gap-3 sm:gap-4 mt-6">
+        <div className="flex flex-col sm:flex-row justify-end gap-3 sm:gap-4 mt-6 py-4">
           <Button
             variant="outline"
             type="button"
             onClick={onClose}
             className="w-full sm:w-auto"
           >
-            Close
+            Cancel
           </Button>
           <Button
             type="submit"
