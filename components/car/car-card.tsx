@@ -38,7 +38,7 @@ function CarCard({ car }: CarCardProps) {
       <Card className="group bg-gray-50 hover:bg-background hover:border-red-500 cursor-pointer transition-all duration-500 m-1 sm:m-5 font-secondary">
         <CardHeader className="p-3 sm:p-5">
           <CardTitle className="space-y-2">
-            <h2 className="text-lg sm:text-xl font-medium">{car.name}</h2>
+            <h2 className="text-lg text-red-600 sm:text-xl font-medium">{car.name}</h2>
             <h2 className="text-2xl sm:text-3xl font-bold">
               <span className="text-xl sm:text-2xl font-light">$</span>
               {car.price}
