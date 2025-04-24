@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { CarsList } from "@/components/car/cars-list";
 import Hero from "@/components/home/hero";
+import MoreInfo from "@/components/home/more-info";
 import { toast } from "sonner";
 import { BookCreatedFlagContext } from "@/context/BookCreatedFlagContext";
 import { getCarsList } from "@/services/cars";
@@ -64,7 +65,8 @@ export default function Home() {
   return (
     <div className="py-4 px-4 md:py-8 md:px-14">
       <BookCreatedFlagContext.Provider value={{ showToastMsg, setShowToastMsg }}>
-        <Hero />
+        <MoreInfo/>
+        {/* <Hero /> */}
         <CarCarousel cars={carsData.cars} />
         {isLoading ? (
           <div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3">
