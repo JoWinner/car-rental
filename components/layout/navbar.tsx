@@ -31,7 +31,7 @@ export function Navbar() {
         <div className="mr-4 hidden w-full md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <Image
-              src="/logo.png"
+              src="/horic-logo.png"
               alt="Logo"
               width={20}
               height={20}

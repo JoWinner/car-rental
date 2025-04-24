@@ -122,7 +122,7 @@ export default function MoreInfo() {
                 transition={{ duration: 0.5 }}
                 className="space-y-4"
               >
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-zinc-900 leading-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-secondary text-red-500 leading-tight">
                   {moreInfoData[currentIndex].title}
                 </h1>
                 <p className="text-zinc-600 text-base sm:text-lg md:text-xl max-w-md mx-auto md:mx-0">

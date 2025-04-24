@@ -8,13 +8,13 @@ export default function Footer() {
     <div className="border-t  border-border/40 bg-zinc-900 backdrop-blur supports-[backdrop-filter]:bg-zinc-900">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
-        <Link href="/"  className="">
+        <Link href="/"  className=" ">
             <Image
-              src="/logo.png"
+              src="/horic-logo.png"
               alt="Logo"
               width={20}
               height={20}
-              className="h-16 w-24"
+              className="h-16 w-24 bg-white rounded-lg"
             />
             <p className="text-sm text-gray-200"> Flag house 2xx Adinkra Street , Accra,Ghana </p>
           </Link>
