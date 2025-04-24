@@ -41,7 +41,7 @@ function ModalCarCard({ car }: CarCardProps) {
 
   return (
     <>
-      <Card className="group bg-gray-50 hover:bg-background hover:border-blue-500 cursor-pointer transition-all duration-500 m-1 sm:m-5 font-secondary">
+      <Card className="group bg-gray-50 hover:bg-background hover:border-red-500 cursor-pointer transition-all duration-500 m-1 sm:m-5 font-secondary">
         <CardHeader className="p-2 sm:p-5">
           <CardTitle className="space-y-2">
             <h2 className="text-[20px] font-medium ">{car.name}</h2>
@@ -84,10 +84,10 @@ function ModalCarCard({ car }: CarCardProps) {
         
             <Link
               href={`/cars/${car.id}`}
-              className="hidden group-hover:flex bg-gradient-to-r from-blue-400 to-blue-700 rounded-lg text-white w-full px-5 py-2 mt-2 justify-between"
+              className="hidden group-hover:flex bg-gradient-to-r from-red-400 to-red-700 rounded-lg text-white w-full px-5 py-2 mt-2 justify-between"
             >
              More Details
-              <span className="bg-blue-400 p-1 rounded-md">
+              <span className="bg-red-400 p-1 rounded-md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"

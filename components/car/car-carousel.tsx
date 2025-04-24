@@ -50,7 +50,7 @@ export function CarCarousel({ cars }: CarCarouselProps) {
 
   return (
     <div className="relative w-full py-12 my-28 font-primary">
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-blue-100 via-white to-blue-200 opacity-70 rounded-xl" />
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-red-100 via-white to-red-200 opacity-70 rounded-xl" />
       <div className="relative z-10">
         <h2 className="text-4xl font-bold text-center text-primary mb-8 font-secondary">
           Featured Cars
@@ -93,7 +93,7 @@ export function CarCarousel({ cars }: CarCarouselProps) {
                       </p>
 
                       <div className="flex flex-wrap gap-2 mt-3">
-                        <Badge className="bg-blue-100 text-blue-800">
+                        <Badge className="bg-red-100 text-red-800">
                           {car.brand}
                         </Badge>
                         <Badge className="bg-green-100 text-green-800">

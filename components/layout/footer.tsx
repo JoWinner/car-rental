@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <div className="border-t  border-border/40 bg-violet-900 backdrop-blur supports-[backdrop-filter]:bg-violet-900">
+    <div className="border-t  border-border/40 bg-zinc-900 backdrop-blur supports-[backdrop-filter]:bg-zinc-900">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
         <Link href="/"  className="">

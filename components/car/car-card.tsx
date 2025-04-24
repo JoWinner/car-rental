@@ -35,7 +35,7 @@ function CarCard({ car }: CarCardProps) {
 
   return (
     <>
-      <Card className="group bg-gray-50 hover:bg-background hover:border-blue-500 cursor-pointer transition-all duration-500 m-1 sm:m-5 font-secondary">
+      <Card className="group bg-gray-50 hover:bg-background hover:border-red-500 cursor-pointer transition-all duration-500 m-1 sm:m-5 font-secondary">
         <CardHeader className="p-3 sm:p-5">
           <CardTitle className="space-y-2">
             <h2 className="text-lg sm:text-xl font-medium">{car.name}</h2>
@@ -75,10 +75,10 @@ function CarCard({ car }: CarCardProps) {
 
           <button
             onClick={() => setShowBookingModal(true)}
-            className="hidden group-hover:flex bg-gradient-to-r from-blue-400 to-blue-700 rounded-lg text-white w-full px-4 py-3 mt-3 justify-between text-base sm:text-lg"
+            className="hidden group-hover:flex bg-gradient-to-r from-red-400 to-red-700 rounded-lg text-white w-full px-4 py-3 mt-3 justify-between text-base sm:text-lg"
           >
             Rent Now
-            <span className="bg-blue-400 p-1 rounded-md">
+            <span className="bg-red-400 p-1 rounded-md">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
