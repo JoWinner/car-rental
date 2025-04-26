@@ -15,9 +15,9 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const routes = [
-  // { href: '/submissions', label: 'Submissions' },
-  // { href: '/submit', label: 'Submit' },
-  { href: "/dashboard", label: "Dashboard" },
+  { href: '/shop', label: 'Buy Car' },
+  { href: '/rent', label: 'Rent Car' },
+  { href: "/dashboard", label: "Customer" },
 ];
 
 export function Navbar() {

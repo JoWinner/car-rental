@@ -133,7 +133,7 @@ export default function Hero() {
                 <div className="w-16 h-1 bg-zinc-900/30 mx-auto md:mx-0"></div>
 
                 <div className="pt-6 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                  <Link href="/cars">
+                  <Link href="/shop">
                     <button className="px-6 py-3 mt-4 bg-primary text-white rounded-full hover:scale-105 transition-all font-bold font-secondary text-base sm:text-lg">
                       Explore Cars
                     </button>

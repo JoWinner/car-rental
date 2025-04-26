@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { TermsAndConditions } from "@/components/layout/terms-and-conditions";
 import BookingModal from "@/components/booking/booking-modal";
 import { CarCarousel } from "@/components/car/car-carousel";
+import { formatPrice } from "@/lib/utils";
 
 interface CarWithImages extends Car {
   images: { url: string }[];
@@ -16,10 +17,10 @@ interface CarWithImages extends Car {
 
 interface CarDetailsProps {
   carId: string;
-  similarCars: CarWithImages[];
+  similarCars: any[];
 }
 
-export function CarDetails({ carId, similarCars }: CarDetailsProps) {
+export function RentCarDetails({ carId, similarCars }: CarDetailsProps) {
   const [car, setCar] = useState<CarWithImages | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState("");
@@ -66,7 +67,7 @@ export function CarDetails({ carId, similarCars }: CarDetailsProps) {
         <div className="font-secondary">
           <h1 className="text-3xl md:text-4xl font-bold">{car.name}</h1>
           <p className="text-3xl md:text-[40px] font-semibold text-primary mt-2">
-            ${car.price}
+            {formatPrice(car.rentPrice || 0)}
             <span className="text-lg md:text-xl font-normal">/day</span>
           </p>
         </div>
@@ -110,34 +111,48 @@ export function CarDetails({ carId, similarCars }: CarDetailsProps) {
 
           <div className="space-y-6">
             <div>
-              <h2 className="text-xl md:text-2xl font-semibold mb-4">Details</h2>
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">
+                Details
+              </h2>
               <div className="grid grid-cols-2 gap-4 md:gap-6">
                 <div className="space-y-1">
                   <p className="text-sm text-muted-foreground">Brand</p>
-                  <p className="text-lg md:text-xl font-secondary">{car.brand}</p>
+                  <p className="text-lg md:text-xl font-secondary">
+                    {car.brand}
+                  </p>
                 </div>
                 <div className="space-y-1">
                   <p className="text-sm text-muted-foreground">Model</p>
-                  <p className="text-lg md:text-xl font-secondary">{car.model}</p>
+                  <p className="text-lg md:text-xl font-secondary">
+                    {car.model}
+                  </p>
                 </div>
                 <div className="space-y-1">
                   <p className="text-sm text-muted-foreground">Year</p>
-                  <p className="text-lg md:text-xl font-secondary">{car.year}</p>
+                  <p className="text-lg md:text-xl font-secondary">
+                    {car.year}
+                  </p>
                 </div>
                 <div className="space-y-1">
                   <p className="text-sm text-muted-foreground">Category</p>
-                  <p className="text-lg md:text-xl font-secondary">{car.category}</p>
+                  <p className="text-lg md:text-xl font-secondary">
+                    {car.category.replace(/_/g, " ")}
+                  </p>
                 </div>
               </div>
             </div>
 
             <div>
-              <h2 className="text-xl md:text-2xl font-semibold mb-4">Description</h2>
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">
+                Description
+              </h2>
               <p className="text-base md:text-lg">{car.description}</p>
             </div>
 
             <div>
-              <h2 className="text-xl md:text-2xl font-semibold mb-4">Features</h2>
+              <h2 className="text-xl md:text-2xl font-semibold mb-4">
+                Features
+              </h2>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 font-mono">
                 {car.features.map((feature) => (
                   <div key={feature} className="flex items-center gap-2">
@@ -152,7 +167,9 @@ export function CarDetails({ carId, similarCars }: CarDetailsProps) {
 
             {car.video && (
               <div>
-                <h2 className="text-xl md:text-2xl font-semibold mb-4">Video Preview</h2>
+                <h2 className="text-xl md:text-2xl font-semibold mb-4">
+                  Video Preview
+                </h2>
                 <video
                   src={car.video}
                   controls
@@ -181,9 +198,7 @@ export function CarDetails({ carId, similarCars }: CarDetailsProps) {
 
       <div className="flex justify-center mt-16 md:mt-24">
         <Link href="/cars">
-          <Button
-            className="px-6 py-3 bg-primary text-white rounded-full hover:scale-105 transition-all font-bold font-secondary text-base md:text-lg"
-          >
+          <Button className="px-6 py-3 bg-primary text-white rounded-full hover:scale-105 transition-all font-bold font-secondary text-base md:text-lg">
             Find More Cars
           </Button>
         </Link>
@@ -193,11 +208,19 @@ export function CarDetails({ carId, similarCars }: CarDetailsProps) {
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
           Similar Cars You Might Like
         </h2>
-        <CarCarousel cars={similarCars} />
+
+        <CarCarousel cars={similarCars} title="Featured Cars You Can Rent" />
       </div>
 
       <BookingModal
-        car={car}
+        car={{
+          id: car.id,
+          name: car.name,
+          brand: car.brand,
+          model: car.model,
+          rentPrice: car.rentPrice || 0,
+          images: car.images,
+        }}
         isOpen={showBookingModal}
         onClose={() => setShowBookingModal(false)}
       />

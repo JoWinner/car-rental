@@ -1,16 +1,16 @@
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { FaGasPump } from "react-icons/fa";
 import { MdAirlineSeatReclineNormal } from "react-icons/md";
 import { PiSteeringWheelFill } from "react-icons/pi";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import Link from "next/link";
+import { formatPrice } from "@/lib/utils"
 
 interface CarCardProps {
   car: {
     id: string;
     name: string;
-    price: number;
+    rentPrice: number;
     brand?: string;
     model?: string;
     images?: { url: string }[];
@@ -22,6 +22,7 @@ interface CarCardProps {
     carAvg?: number;
     mpg?: number;
   };
+
 }
 
 function ModalCarCard({ car }: CarCardProps) {
@@ -44,35 +45,34 @@ function ModalCarCard({ car }: CarCardProps) {
       <Card className="group bg-gray-50 hover:bg-background hover:border-red-500 cursor-pointer transition-all duration-500 m-1 sm:m-5 font-secondary">
         <CardHeader className="p-2 sm:p-5">
           <CardTitle className="space-y-2">
-            <h2 className="text-[20px] font-medium ">{car.name}</h2>
+            <h2 className="text-[20px] font-medium text-primary ">{car.name}</h2>
             <h2 className="text-[28px] font-bold">
-              <span className="text-[25px] font-light">$</span>
-              {car.price}
+              {formatPrice(car.rentPrice)}
               <span className="text-[12px] font-light"> /day</span>
             </h2>
           </CardTitle>
         </CardHeader>
-        <CardContent className="p-2 sm:p-8 pt-0">
-          <div className="flex justify-center">
-            <Link href={`/cars/${car.id}`}>
+        <CardContent className="p-2 pt-0">
+          <div className="flex justify-center rounded-lg">
+            <Link href={`/cars/${car.id}`} className="rounded-lg">
               <Image
                 src={imageUrl}
                 alt={car.name}
                 width={220}
                 height={200}
-                className="w-[250px] h-[150px] mb-3 object-contain"
+                className="w-[300px] h-[200px] mb-3 object-contain"
               />
             </Link>
           </div>
           <div className="flex justify-around group-hover:hidden font-primary">
             <div className="text-center text-gray-500">
               <PiSteeringWheelFill className="w-full text-[22px] mb-2" />
-              <h2 className="line-clamp-5 text-[14px] font-light">{carType}</h2>
+              <h2 className="line-clamp-5 text-[14px] font-light">{carType.replace(/_/g, " ")}</h2>
             </div>
             <div className="text-center text-gray-500">
               <MdAirlineSeatReclineNormal className="w-full text-[22px] mb-2" />
               <h2 className="line-clamp-5 text-[14px] font-light">
-                {seatCount} S
+                {seatCount} Seats
               </h2>
             </div>
             <div className="text-center text-gray-500">

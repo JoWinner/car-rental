@@ -1,12 +1,11 @@
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
-
 import { isAdminUser } from "@/lib/user-profile";
 import { db } from "@/lib/db";
 import { AdminHeader } from "@/components/admin/admin-header";
-import { CarTable } from "@/components/admin/car-table";
+import { CarsForRentTable } from "@/components/admin/cars-for-rent-table";
 
-export default async function AdminCarsPage() {
+export default async function AdminCarsForRentPage() {
   const { userId } = await auth();
 
   if (!userId) {
@@ -19,10 +18,13 @@ export default async function AdminCarsPage() {
     redirect("/dashboard");
   }
 
-  // Fetch all cars
-  const cars = await db.car.findMany({
+  // Fetch cars placed on rent
+  const carsForRent = await db.car.findMany({
     include: {
       images: true,
+    },
+    where: {
+      onRent: true,
     },
     orderBy: {
       createdAt: "desc",
@@ -32,16 +34,16 @@ export default async function AdminCarsPage() {
   return (
     <>
       <AdminHeader
-        title="Car Management"
-        description="Add, edit, and manage your car fleet."
+        title="Cars For Rent"
+        description="Manage your cars that are available for rent."
         action={{
-          label: "Add car",
+          label: "Add car for rent",
           href: "/admin/cars/new",
         }}
       />
       <div>
-        <h2 className="text-2xl font-bold mb-4">Car Fleet</h2>
-        <CarTable cars={cars} showActions editUrl="/admin/cars" />
+        <h2 className="text-2xl font-bold mb-4">Cars Currently For Rent</h2>
+        <CarsForRentTable cars={carsForRent} />
       </div>
     </>
   );

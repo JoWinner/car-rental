@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { format } from "date-fns";
 import {
   Table,
@@ -9,7 +10,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { BookingStatus, PaymentStatus } from "@prisma/client";
-
+import { formatPrice } from "@/lib/utils";
 interface BookingHistoryProps {
   bookings: any[];
   isAdmin?: boolean;
@@ -50,11 +51,21 @@ export function BookingHistory({
           {bookings.map((booking) => (
             <TableRow key={booking.id}>
               <TableCell>
-                <div>
-                  <p className="font-medium">{booking.car.name}</p>
-                  <p className="text-sm text-gray-500">
-                    {booking.car.brand} {booking.car.model}
-                  </p>
+                <div className="flex items-center gap-3">
+                  <div className="relative h-12 w-12 rounded-md overflow-hidden">
+                    <Image
+                      src={booking.car.images[0]?.url || "/placeholder-car.png"}
+                      alt={booking.car.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <p className="font-medium">{booking.car.name}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {booking.car.brand} {booking.car.model}
+                    </p>
+                  </div>
                 </div>
               </TableCell>
               <TableCell>
@@ -63,14 +74,20 @@ export function BookingHistory({
                   <p>To: {format(new Date(booking.endDate), "PPP")}</p>
                 </div>
               </TableCell>
-              <TableCell>${booking.totalPrice.toFixed(2)}</TableCell>
+              <TableCell>{formatPrice(booking.totalPrice)}</TableCell>
               <TableCell>
-                <Badge className={statusColors[booking.status as BookingStatus]}>
+                <Badge
+                  className={statusColors[booking.status as BookingStatus]}
+                >
                   {booking.status}
                 </Badge>
               </TableCell>
               <TableCell>
-                <Badge className={paymentStatusColors[booking.paymentStatus as PaymentStatus]}>
+                <Badge
+                  className={
+                    paymentStatusColors[booking.paymentStatus as PaymentStatus]
+                  }
+                >
                   {booking.paymentStatus}
                 </Badge>
               </TableCell>

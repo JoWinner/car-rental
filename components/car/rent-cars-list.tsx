@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import CarCard from "@/components/car/car-card";
+import CarCard from "@/components/car/rent-car-card";
 import {
   Pagination,
   PaginationContent,
@@ -41,7 +41,7 @@ interface CarsListProps {
   carsList?: any[];
 }
 
-export function CarsList({ initialData, carsList }: CarsListProps) {
+export function RentCarsList({ initialData, carsList }: CarsListProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
@@ -141,8 +141,8 @@ export function CarsList({ initialData, carsList }: CarsListProps) {
     <div className="space-y-8">
       {/* Search Bar */}
       <div className="mt-4 sm:mt-5">
-        <h2 className="text-center text-lg sm:text-xl text-gray-400 mb-3 font-secondary">
-          Let's find your perfect car
+        <h2 className="text-center text-xl sm:text-2xl text-gray-400 mb-3 font-secondary">
+          Let's find your perfect car to rent
         </h2>
         <div className="flex justify-center">
           <div className="flex bg-gray-100 p-2 px-4 gap-2 rounded-full items-center w-full max-w-xl">

@@ -1,17 +1,18 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaGasPump } from "react-icons/fa";
 import { MdAirlineSeatReclineNormal } from "react-icons/md";
 import { PiSteeringWheelFill } from "react-icons/pi";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import BookingModal from "@/components/booking/booking-modal";
-import Link from "next/link";
+import { formatPrice } from "@/lib/utils"
 
 interface CarCardProps {
   car: {
     id: string;
     name: string;
-    price: number;
+    rentPrice: number;
     brand?: string;
     model?: string;
     images?: { url: string }[];
@@ -25,7 +26,7 @@ interface CarCardProps {
   };
 }
 
-function CarCard({ car }: CarCardProps) {
+function RentCarCard({ car }: CarCardProps) {
   const [showBookingModal, setShowBookingModal] = React.useState(false);
 
   const imageUrl = car?.images?.[0]?.url || car?.image?.url || "/placeholder-car.jpg";
@@ -40,8 +41,7 @@ function CarCard({ car }: CarCardProps) {
           <CardTitle className="space-y-2">
             <h2 className="text-lg text-red-600 sm:text-xl font-medium">{car.name}</h2>
             <h2 className="text-2xl sm:text-3xl font-bold">
-              <span className="text-xl sm:text-2xl font-light">$</span>
-              {car.price}
+              {formatPrice(car.rentPrice)}
               <span className="text-xs sm:text-sm font-light"> /day</span>
             </h2>
           </CardTitle>
@@ -54,21 +54,21 @@ function CarCard({ car }: CarCardProps) {
                 alt={car.name}
                 width={220}
                 height={200}
-                className="w-[280px] h-[180px] sm:w-[250px] sm:h-[150px] mb-3 object-contain"
+                className="w-[330px] h-[230px] sm:w-[300px] sm:h-[200px] mb-3 object-contain rounded-lg"
               />
             </Link>
           </div>
           <div className="flex justify-around group-hover:hidden font-primary">
             <div className="text-center text-gray-500">
-              <PiSteeringWheelFill className="w-full text-xl sm:text-2xl mb-2" />
-              <h2 className="text-sm sm:text-base font-light">{carType}</h2>
+              <PiSteeringWheelFill className="w-full text-xl sm:text-xl mb-2" />
+              <h2 className="text-sm sm:text-base font-light">{carType.replace(/_/g, " ")}</h2>
             </div>
             <div className="text-center text-gray-500">
-              <MdAirlineSeatReclineNormal className="w-full text-xl sm:text-2xl mb-2" />
+              <MdAirlineSeatReclineNormal className="w-full text-xl sm:text-xl mb-2" />
               <h2 className="text-sm sm:text-base font-light">{seatCount} Seat</h2>
             </div>
             <div className="text-center text-gray-500">
-              <FaGasPump className="w-full text-xl sm:text-2xl mb-2" />
+              <FaGasPump className="w-full text-xl sm:text-xl mb-2" />
               <h2 className="text-sm sm:text-base font-light">{mpg} MPG</h2>
             </div>
           </div>
@@ -105,4 +105,4 @@ function CarCard({ car }: CarCardProps) {
   );
 }
 
-export default CarCard;
+export default RentCarCard;

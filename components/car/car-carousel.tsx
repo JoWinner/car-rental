@@ -11,11 +11,12 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
+import { formatPrice } from "@/lib/utils";
 
 interface CarWithImages {
   id: string;
   name: string;
-  price: number;
+  rentPrice: number | null;
   brand: string;
   seats: number;
   carTransmission: string;
@@ -26,9 +27,13 @@ interface CarWithImages {
 
 interface CarCarouselProps {
   cars: CarWithImages[];
+  title?: string;
 }
 
-export function CarCarousel({ cars }: CarCarouselProps) {
+export function CarCarousel({
+  cars,
+  title = "Featured Cars You Can Rent",
+}: CarCarouselProps) {
   const [displayCars, setDisplayCars] = useState<CarWithImages[]>([]);
 
   const shuffleArray = (array: CarWithImages[]) => {
@@ -53,7 +58,7 @@ export function CarCarousel({ cars }: CarCarouselProps) {
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-red-100 via-white to-red-200 opacity-70 rounded-xl" />
       <div className="relative z-10">
         <h2 className="text-4xl font-bold text-center text-primary mb-8 font-secondary">
-          Featured Cars
+          {title}
         </h2>
 
         <Carousel
@@ -85,11 +90,11 @@ export function CarCarousel({ cars }: CarCarouselProps) {
                     </div>
 
                     <div className="p-4">
-                      <h3 className="text-xl font-secondary text-gray-800">
+                      <h3 className="text-lg font-semibold font-secondary text-zinc-900">
                         {car.name}
                       </h3>
-                      <p className="text-sm font-secondary text-gray-600">
-                        ${car.price.toFixed(2)}/day
+                      <p className="text-lg font-normal font-secondary text-primary">
+                        {formatPrice(car.rentPrice || 0)}/day
                       </p>
 
                       <div className="flex flex-wrap gap-2 mt-3">
@@ -105,12 +110,8 @@ export function CarCarousel({ cars }: CarCarouselProps) {
                       </div>
 
                       <div className="mt-4 flex flex-row gap-2 text-sm text-gray-600">
-                        <div>
-                          {car.category}
-                        </div>
-                        <div>
-                           {car.year}
-                        </div>
+                        <div>{car.category.replace(/_/g, " ")}</div>
+                        <div>{car.year}</div>
                       </div>
                     </div>
                   </div>

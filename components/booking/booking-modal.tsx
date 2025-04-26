@@ -18,7 +18,7 @@ interface BookingModalProps {
     name: string;
     brand?: string;
     model?: string;
-    price: number;
+    rentPrice: number;
     images?: { url: string }[];
     image?: { url: string };
   };

@@ -21,7 +21,15 @@ export function formatDate(date: Date | string | null | undefined) {
   }
 }
 
-export const formatPrice = new Intl.NumberFormat("en-GH", {
-  style: "currency",
-  currency: "GHS",
-});
+// export const formatPrice = new Intl.NumberFormat("en-GH", {
+//   style: "currency",
+//   currency: "GHS",
+// });
+
+export const formatPrice = (price: number) => {
+  return new Intl.NumberFormat("en-GH", {
+    style: "currency",
+    currency: "GHS",
+    maximumFractionDigits: 0,
+  }).format(price);
+};

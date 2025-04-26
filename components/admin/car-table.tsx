@@ -15,13 +15,16 @@ import { CarStatus } from "@prisma/client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-
+import {formatPrice} from "@/lib/utils"
 interface Car {
   id: string;
   name: string;
   brand: string;
   model: string;
-  price: number;
+  rentPrice: number | null;
+  salePrice?: number | null;
+  onRent?: boolean;
+  onSale?: boolean;
   status: CarStatus;
   year: number;
 }
@@ -118,7 +121,7 @@ export function CarTable({
                   <p> {car.year}</p>
                 </div>
               </TableCell>
-              <TableCell>${car.price.toFixed(2)}</TableCell>
+              <TableCell>{formatPrice(car.rentPrice || 0)}</TableCell>
               <TableCell>
                 <Badge className={statusColors[car.status]}>{car.status}</Badge>
               </TableCell>

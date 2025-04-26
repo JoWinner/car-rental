@@ -4,7 +4,6 @@ import { isAdminUser } from "@/lib/user-profile";
 import { db } from "@/lib/db";
 import { CarForm } from "@/components/admin/car-form";
 import { AdminHeader } from "@/components/admin/admin-header";
-import { AdminShell } from "@/components/admin/admin-shell";
 
 export default async function CarPage({
   params,

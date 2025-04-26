@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 import { CarCarousel } from "@/components/car/car-carousel";
-import { CarsList } from "@/components/car/cars-list";
+import { RentCarsList } from "@/components/car/rent-cars-list";
 import { db } from "@/lib/db";
 import { CarStatus } from "@prisma/client";
 
-export default async function CarsPage() {
+export default async function RentCarsPage() {
   // Get initial data with pagination and filters
   const initialData = await db.car.findMany({
     take: 9,
@@ -29,31 +29,39 @@ export default async function CarsPage() {
     <div className="py-8 px-4 md:px-14">
       <div className="mb-8">
         <h1 className="text-3xl font-bold font-secondary text-primary">
-          Available Cars
+          Available Cars You Can Rent
         </h1>
         <p className="text-muted-foreground">
           Browse and book from our selection of premium vehicles
         </p>
       </div>
-      <Suspense fallback={<div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <Suspense
+        fallback={
+          <div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(6)].map((_, i) => (
               <div
                 key={i}
                 className="h-[300px] rounded-lg bg-gray-100 animate-pulse"
               />
             ))}
-          </div>}>
-        <CarCarousel cars={initialData} />
+          </div>
+        }
+      >
+        <CarCarousel cars={initialData} title="Featured Cars You Can Rent" />
       </Suspense>
-      <Suspense fallback={<div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <Suspense
+        fallback={
+          <div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(6)].map((_, i) => (
               <div
                 key={i}
                 className="h-[300px] rounded-lg bg-gray-100 animate-pulse"
               />
             ))}
-          </div>}>
-        <CarsList
+          </div>
+        }
+      >
+        <RentCarsList
           initialData={{
             cars: initialData,
             metadata: {

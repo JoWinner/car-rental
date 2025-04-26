@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CarsList } from "@/components/car/cars-list";
-import MoreInfo from "@/components/home/hero";
+import { RentCarsList } from "@/components/car/rent-cars-list";
+import Hero from "@/components/home/hero";
 import Banner from "@/components/home/banner";
 import { toast } from "sonner";
 import { BookCreatedFlagContext } from "@/context/BookCreatedFlagContext";
 import { getCarsList } from "@/services/cars";
 import { CarCarousel } from "@/components/car/car-carousel";
+import { ShopClient } from "@/components/shop/shop-client";
 
 interface CarsData {
   cars: any[];
@@ -64,10 +65,13 @@ export default function Home() {
 
   return (
     <div className="py-4 px-4 md:py-8 md:px-14">
-      <BookCreatedFlagContext.Provider value={{ showToastMsg, setShowToastMsg }}>
-        <MoreInfo/>
+      <BookCreatedFlagContext.Provider
+        value={{ showToastMsg, setShowToastMsg }}
+      >
+        <Hero />
+        <Banner />
+        <ShopClient />
         <CarCarousel cars={carsData.cars} />
-        <Banner/>
         {isLoading ? (
           <div className="grid gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(6)].map((_, i) => (
@@ -78,7 +82,7 @@ export default function Home() {
             ))}
           </div>
         ) : (
-          <CarsList initialData={carsData} />
+          <RentCarsList initialData={carsData} />
         )}
       </BookCreatedFlagContext.Provider>
     </div>

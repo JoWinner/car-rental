@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Car, LayoutDashboard, UserCircle, Menu, X } from "lucide-react";
+import { Car, Book, LayoutDashboard, UserCircle, Menu, X, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -17,15 +17,27 @@ const navigation = [
     href: "/dashboard",
     icon: LayoutDashboard,
   },
+ 
   {
-    name: "Rent a Car",
-    href: "/cars",
-    icon: Car,
+    name: "My Orders",
+    href: "/dashboard/orders",
+    icon: ShoppingCart,
   },
+  
   {
     name: "Profile",
     href: "/dashboard/profile",
     icon: UserCircle,
+  },
+  {
+    name: "Buy a Car",
+    href: "/shop",
+    icon: Car,
+  },
+  {
+    name: "Rent a Car",
+    href: "/rent",
+    icon: Book,
   },
 ];
 

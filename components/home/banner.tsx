@@ -12,7 +12,7 @@ export default function Banner() {
           src="/more-info-autos/horic-banner.jpg"
           alt="Horic Autos - Need a Car?"
           fill
-          className="object-cover object-center rounded-lg"
+          className="object-cover object-center rounded-xl"
           priority
         />
       </div>

@@ -46,11 +46,29 @@ export async function PATCH(
     }
 
     const body = await req.json();
-    const { name, brand, model, year, price, category, description, status } =
-      body;
+    const {
+      name,
+      brand,
+      model,
+      year,
+      rentPrice,
+      category,
+      description,
+      status,
+      onSale,
+      salePrice,
+      onRent,
+    } = body;
 
     if (!Object.values(CarStatus).includes(status)) {
       return new NextResponse("Invalid status", { status: 400 });
+    }
+
+    // Validate sale price if car is on sale
+    if (onSale && (!salePrice || salePrice <= 0)) {
+      return new NextResponse("Sale price is required when car is on sale", {
+        status: 400,
+      });
     }
 
     const car = await db.car.findUnique({
@@ -68,10 +86,13 @@ export async function PATCH(
         brand,
         model,
         year,
-        price,
+        rentPrice,
         category,
         description,
         status,
+        onSale,
+        salePrice,
+        onRent,
       },
       include: {
         images: true,

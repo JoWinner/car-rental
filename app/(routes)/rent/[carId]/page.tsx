@@ -1,9 +1,9 @@
 import { Suspense } from "react";
-import { CarDetails } from "@/components/car/car-details";
+import { RentCarDetails } from "@/components/car/rent-car-details";
 import { db } from "@/lib/db";
 import { CarStatus } from "@prisma/client";
 
-export default async function CarPage({
+export default async function RentCarPage({
   params,
 }: {
   params: { carId: string };
@@ -24,7 +24,7 @@ export default async function CarPage({
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <CarDetails carId={params.carId} similarCars={similarCars} />
+      <RentCarDetails carId={params.carId} similarCars={similarCars} />
     </Suspense>
   );
 }

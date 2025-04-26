@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Car, LayoutDashboard, Users, Menu, X } from "lucide-react";
+import { Car, LayoutDashboard, Users, Menu, X, ShoppingCart, CarTaxiFront } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -23,9 +23,24 @@ const navigation = [
     icon: Car,
   },
   {
+    name: "Cars For Rent",
+    href: "/admin/cars-for-rent",
+    icon: CarTaxiFront,
+  },
+  {
+    name: "Cars For Sale",
+    href: "/admin/cars-for-sale",
+    icon: ShoppingCart,
+  },
+  {
     name: "Users",
     href: "/admin/users",
     icon: Users,
+  },
+  {
+    name: "Sale Orders",
+    href: "/admin/sale-orders",
+    icon: ShoppingCart,
   },
 ];
 
@@ -50,7 +65,7 @@ export function AdminShell({ children }: AdminShellProps) {
         className="fixed top-16 left-5 z-40 lg:hidden"
         onClick={() => setSidebarOpen(!sidebarOpen)}
       >
-        {sidebarOpen ? " ": <Menu className="h-6 w-6" />}
+        {sidebarOpen ? " " : <Menu className="h-6 w-6" />}
       </Button>
 
       {/* Sidebar */}
@@ -61,7 +76,7 @@ export function AdminShell({ children }: AdminShellProps) {
         )}
       >
         <div className="p-6">
-        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold">Admin Panel</h2>
             <Button
               variant="ghost"
@@ -71,7 +86,8 @@ export function AdminShell({ children }: AdminShellProps) {
             >
               <X className="h-5 w-5" />
             </Button>
-          </div>          <nav className="space-y-4">
+          </div>{" "}
+          <nav className="space-y-4">
             {navigation.map((item) => {
               const isActive = pathname === item.href;
               return (
