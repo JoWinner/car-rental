@@ -71,7 +71,7 @@ export function Navbar() {
 
           <MobileLink
                 href="/"
-                className="flex items-center md:hidden ml-[150px]"
+                className="flex items-center md:hidden ml-[80px]"
                 onOpenChange={setIsOpen}
               >
                 <Image
