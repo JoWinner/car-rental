@@ -8,7 +8,6 @@ import { FilterControls } from "@/components/shop/filter-controls";
 import { ActiveFilters } from "@/components/shop/active-filters";
 import { DesktopFilterPanel } from "@/components/shop/desktop-filter-panel";
 import { ShopCarGrid } from "@/components/shop/shop-car-grid";
-import { ShopCarList } from "@/components/shop/shop-car-list";
 import { EmptyState } from "@/components/shop/empty-state";
 import { LoadingState } from "@/components/shop/loading-state";
 import { Car, FilterState } from "@/components/shop/types";
@@ -18,7 +17,6 @@ export function ShopClient() {
   const [loading, setLoading] = useState(true);
   const [activeFilters, setActiveFilters] = useState(0);
   const [showFilters, setShowFilters] = useState(false);
-  const [viewType, setViewType] = useState<"grid" | "list">("grid");
   const [filters, setFilters] = useState<FilterState>({
     query: "",
     category: "all",
@@ -92,7 +90,7 @@ export function ShopClient() {
       <div className=" flex items-center justify-center">
       <div className="flex items-center rounded-full overflow-hidden shadow-lg">
           <Link
-            href="/cars/buy"
+            href="/shop"
             className={cn(
               "bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3",
               "transition-all duration-300 flex items-center justify-center font-secondary",
@@ -130,8 +128,6 @@ export function ShopClient() {
             setFilters={setFilters}
             showFilters={showFilters}
             setShowFilters={setShowFilters}
-            viewType={viewType}
-            setViewType={setViewType}
             clearAllFilters={clearAllFilters}
           />
         </div>
@@ -167,11 +163,10 @@ export function ShopClient() {
         <LoadingState />
       ) : cars.length === 0 ? (
         <EmptyState clearAllFilters={clearAllFilters} />
-      ) : viewType === "grid" ? (
+      ) :  (
         <ShopCarGrid cars={cars} />
-      ) : (
-        <ShopCarList cars={cars}  />
-      )}
+      )
+      }
     </div>
   );
 }

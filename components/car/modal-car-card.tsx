@@ -53,14 +53,14 @@ function ModalCarCard({ car }: CarCardProps) {
           </CardTitle>
         </CardHeader>
         <CardContent className="p-2 pt-0">
-          <div className="flex justify-center rounded-lg">
-            <Link href={`/cars/${car.id}`} className="rounded-lg">
+          <div className="flex justify-center">
+            <Link href={`/cars/${car.id}`} >
               <Image
                 src={imageUrl}
                 alt={car.name}
                 width={220}
                 height={200}
-                className="w-[300px] h-[200px] mb-3 object-contain"
+                className="w-[300px] h-[225px] mb-3 object-contain rounded-lg"
               />
             </Link>
           </div>

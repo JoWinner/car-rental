@@ -75,6 +75,7 @@ export default async function RentCarsPage() {
           }}
         />
       </Suspense>
+      
     </div>
   );
 }

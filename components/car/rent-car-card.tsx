@@ -36,9 +36,9 @@ function RentCarCard({ car }: CarCardProps) {
 
   return (
     <>
-      <Card className="group bg-gray-50 hover:bg-background hover:border-red-500 cursor-pointer transition-all duration-500 m-1 sm:m-5 font-secondary">
+      <Card className="group bg-gray-50 hover:bg-background hover:border-red-500 cursor-pointer transition-all duration-500 m-1 sm:m-5 ">
         <CardHeader className="p-3 sm:p-5">
-          <CardTitle className="space-y-2">
+          <CardTitle className="space-y-2 font-secondary">
             <h2 className="text-lg text-red-600 sm:text-xl font-medium">{car.name}</h2>
             <h2 className="text-2xl sm:text-3xl font-bold">
               {formatPrice(car.rentPrice)}
@@ -54,7 +54,7 @@ function RentCarCard({ car }: CarCardProps) {
                 alt={car.name}
                 width={220}
                 height={200}
-                className="w-[330px] h-[230px] sm:w-[300px] sm:h-[200px] mb-3 object-contain rounded-lg"
+                className="w-[330px] h-[240px] rounded-lg sm:w-[300px] sm:h-[197px] mb-3 object-contain "
               />
             </Link>
           </div>

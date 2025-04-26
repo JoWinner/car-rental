@@ -38,6 +38,7 @@ export function Navbar() {
               className="h-16 w-24"
             />
           </Link>
+
           <nav className="flex items-center justify-end w-full space-x-6 text-sm font-medium">
             {routes.map((route) => (
               <Link
@@ -55,47 +56,69 @@ export function Navbar() {
           </nav>
         </div>
 
+
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
+       
           <SheetTrigger asChild>
             <Button
               variant="ghost"
               className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
             >
-              <ChevronDown className="h-5 w-5" />
+              <ChevronDown className="h-8 w-8" />
               <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="top" className="w-full h-[50vh] border-b-2">
-            <div className="flex items-center justify-between mb-4 pr-4">
-              <MobileLink
+
+          <MobileLink
                 href="/"
-                className="flex items-center"
+                className="flex items-center md:hidden ml-[150px]"
                 onOpenChange={setIsOpen}
               >
                 <Image
-                  src="/logo.png"
+                  src="/horic-logo.png"
                   alt="Logo"
                   width={20}
                   height={20}
                   className="h-16 w-24"
                 />
               </MobileLink>
-             
-            </div>
-            <div className="flex flex-col items-center justify-center h-full space-y-6 text-lg">
-              {routes.map((route) => (
-                <MobileLink
-                  key={route.href}
-                  href={route.href}
-                  onOpenChange={setIsOpen}
-                  className="text-center"
-                >
-                  {route.label}
-                </MobileLink>
-              ))}
-            </div>
-          </SheetContent>
+
+              <SheetContent side="top" className="w-full h-[50vh] border-b-2 p-0 overflow-hidden">
+  <div className="flex flex-col h-full">
+    {/* Header with logo and close button */}
+    <div className="flex items-center justify-between p-4 border-b">
+      <MobileLink href="/" className="flex items-center" onOpenChange={setIsOpen}>
+        <Image src="/horic-logo.png" alt="Logo" width={20} height={20} className="h-16 w-24 object-contain" />
+      </MobileLink>
+     
+    </div>
+
+    {/* Navigation links with better spacing and visual treatment */}
+    <div className="flex-1 py-2">
+      <nav className="grid gap-2 px-2">
+        {routes.map((route) => (
+          <MobileLink
+            key={route.href}
+            href={route.href}
+            onOpenChange={setIsOpen}
+            className="flex items-center justify-center py-1 text-lg font-medium transition-colors hover:bg-gray-100 rounded-md"
+          >
+            {route.label}
+          </MobileLink>
+        ))}
+      </nav>
+    </div>
+
+    {/* Optional footer area */}
+    <div className="p-4 border-t text-center text-sm text-muted-foreground">
+      <p>© {new Date().getFullYear()} Horic Autos</p>
+    </div>
+  </div>
+</SheetContent>
+
         </Sheet>
+
+      
 
         <div className="flex flex-1 items-center justify-end space-x-2 md:justify-end">
           <nav className="flex items-center">
@@ -115,6 +138,8 @@ export function Navbar() {
             )}
           </nav>
         </div>
+
+
       </div>
     </header>
   );

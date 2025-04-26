@@ -8,49 +8,50 @@ import { motion, AnimatePresence } from "framer-motion";
 const heroInfoData = [
   {
     id: 1,
-    title: "The largest luxury car rentals marketplace",
+    title: "Your Destination for Luxury Vehicles",
     description:
-      "Our team offering you a wide selection of high-end cars for rent",
+      "Explore an exclusive collection of high-end cars ready for purchase — performance, prestige, and style, all in one place.",
     image: "/more-info-autos/01.png",
     alt: "Luxury Rolls Royce",
   },
   {
     id: 2,
-    title: "Experience ultimate performance",
-    description: "Drive the most powerful supercars available on the market",
+    title: "Unleash Unrivaled Performance",
+    description: "Own the world's most powerful and exhilarating supercars — engineered for those who demand the best.",
     image: "/more-info-autos/02-interior.png",
     alt: "Ferrari Supercar",
   },
   {
     id: 3,
-    title: "Elegance in every journey",
-    description: "Premium sedans for business and leisure travel",
+    title: "Elevate Every Drive",
+    description: "Premium sedans that blend cutting-edge innovation with classic luxury — ideal for business or personal excellence.",
     image: "/more-info-autos/03.png",
     alt: "Mercedes S-Class",
   },
   {
     id: 4,
-    title: "Adventure awaits",
-    description: "Luxury SUVs for those who demand both comfort and capability",
+    title: "Luxury Meets Adventure",
+    description: "Discover elite SUVs offering supreme comfort, off-road capability, and executive-level design — now available for you.",
     image: "/more-info-autos/04-interior.jpg",
     alt: "Range Rover",
   },
   {
     id: 5,
-    title: "Classic sophistication",
+    title: "Celebrate Milestones with Timeless Cars",
     description:
-      "Timeless vintage cars for special occasions and memorable events",
+      "Mark special occasions with elegance — choose from our selection of classic luxury cars designed to make lasting memories.",
     image: "/more-info-autos/05.png",
     alt: "Classic Bentley",
   },
   {
-    id: 5,
-    title: "Classic sophistication",
+    id: 6,
+    title: "Collect, Cruise, or Showcase",
     description:
-      "Timeless vintage cars for special occasions and memorable events",
+      "Discover rare vintage and classic models perfect for collectors, exhibitions, or a stylish Sunday drive.",
     image: "/more-info-autos/06.png",
     alt: "Classic Bentley",
   },
+  
 ];
 
 export default function Hero() {

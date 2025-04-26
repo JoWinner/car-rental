@@ -35,6 +35,7 @@ export async function getCarsList(): Promise<CarsResponse> {
   }
 }
 
+
 export async function getFilteredCars(
   params: URLSearchParams
 ): Promise<CarsResponse> {

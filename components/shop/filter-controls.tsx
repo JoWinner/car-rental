@@ -14,8 +14,6 @@ interface FilterControlsProps {
   setFilters: (filters: FilterState) => void
   showFilters: boolean
   setShowFilters: (show: boolean) => void
-  viewType: "grid" | "list"
-  setViewType: (type: "grid" | "list") => void
   clearAllFilters: () => void
 }
 
@@ -25,8 +23,6 @@ export function FilterControls({
   setFilters,
   showFilters,
   setShowFilters,
-  viewType,
-  setViewType,
   clearAllFilters,
 }: FilterControlsProps) {
   return (
@@ -83,55 +79,6 @@ export function FilterControls({
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-
-      {/* View type toggle */}
-      <div className="hidden sm:flex border rounded-md overflow-hidden">
-        <Button
-          variant="ghost"
-          size="sm"
-          className={cn("rounded-none border-0", viewType === "grid" ? "bg-gray-100" : "bg-transparent")}
-          onClick={() => setViewType("grid")}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <rect x="3" y="3" width="7" height="7" />
-            <rect x="14" y="3" width="7" height="7" />
-            <rect x="3" y="14" width="7" height="7" />
-            <rect x="14" y="14" width="7" height="7" />
-          </svg>
-        </Button>
-        <Button
-          variant="ghost"
-          size="sm"
-          className={cn("rounded-none border-0", viewType === "list" ? "bg-gray-100" : "bg-transparent")}
-          onClick={() => setViewType("list")}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="3" y1="6" x2="21" y2="6" />
-            <line x1="3" y1="12" x2="21" y2="12" />
-            <line x1="3" y1="18" x2="21" y2="18" />
-          </svg>
-        </Button>
-      </div>
     </div>
   )
 }
